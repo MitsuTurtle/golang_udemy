@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"todo_app/app/controllers"
 	"todo_app/app/models"
 )
 
@@ -73,6 +74,10 @@ func main() {
 		}
 	*/
 
-	t, _ := models.GetTodo(3)
-	t.DeleteTodo()
+	/*
+		t, _ := models.GetTodo(3)
+		t.DeleteTodo()
+	*/
+
+	controllers.StartMainServer()
 }
