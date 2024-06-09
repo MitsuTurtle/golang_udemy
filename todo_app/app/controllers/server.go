@@ -20,10 +20,10 @@ func generateHTML(w http.ResponseWriter, data interface{}, filenames ...string) 
 
 func session(w http.ResponseWriter, r *http.Request) (sess models.Session, err error) {
 	cookie, err := r.Cookie("_cookie")
-	if err != nil {
+	if err == nil {
 		sess = models.Session{UUID: cookie.Value}
 		if ok, _ := sess.CheckSession(); !ok {
-			err = fmt.Errorf("Invalid session")
+			err = fmt.Errorf("invalid session")
 		}
 	}
 	return sess, err
@@ -37,6 +37,7 @@ func StartMainServer() error {
 	http.HandleFunc("/signup", signup)
 	http.HandleFunc("/login", login)
 	http.HandleFunc("/authenticate", authenticate)
+	http.HandleFunc("/logout", logout)
 	http.HandleFunc("/todos", index)
 	return http.ListenAndServe(":"+config.Config.Port, nil)
 }
